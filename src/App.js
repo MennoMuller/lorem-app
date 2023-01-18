@@ -17,6 +17,19 @@ import websitesIcon from "./img/websites.png";
 import weatherIcon from "./img/weather.png";
 
 class App extends React.Component {
+  state = {
+    user: {},
+    tasks: [],
+    websites: []
+  };
+
+  handleTasks = (tasks) => {
+    let tasksObject = JSON.parse(tasks);
+    this.setState({
+      tasks: tasksObject
+    });
+  };
+
   render() {
     return (
       <div className="app-grid">
