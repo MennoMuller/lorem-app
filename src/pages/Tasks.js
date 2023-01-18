@@ -1,4 +1,5 @@
 import React from "react";
+import TasksProgress from "../blocks/TasksProgress";
 
 const Tasks = (props) => {
   return (
@@ -6,7 +7,11 @@ const Tasks = (props) => {
       <h1>Tasks</h1>
       <div className="main-grid">
         <div className="grid-item item-a">My tasks</div>
-        <div className="grid-item item-b">Progress</div>
+        <TasksProgress
+          tasksLeft={-2}
+          completedTasks={13}
+          totalTasks={12}
+        />
         <div className="grid-item item-c">
           Finished tasks
         </div>

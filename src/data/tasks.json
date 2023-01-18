@@ -6,7 +6,7 @@
     "deadline_date": "2023-02-01",
     "deadline_time": "13:30",
     "complete": false,
-    "user_username": "Menno"
+    "user_id": 1
   },
   {
     "id": 2,
@@ -14,14 +14,14 @@
     "category": "Misc",
     "deadline_date": "2023-02-22",
     "complete": true,
-    "user_username": "Menno"
+    "user_id": 1
   },
   {
     "id": 3,
     "name": "Do something without a deadline",
     "category": "Misc",
     "complete": false,
-    "user_username": "Menno"
+    "user_id": 1
   },
   {
     "id": 4,
@@ -30,7 +30,7 @@
     "deadline_date": "2023-02-01",
     "deadline_time": "13:30",
     "complete": false,
-    "user_username": "Menno"
+    "user_id": 1
   },
   {
     "id": 5,
@@ -39,6 +39,6 @@
     "deadline_date": "2023-02-01",
     "deadline_time": "13:30",
     "complete": false,
-    "user_username": "Menno"
+    "user_id": 1
   }
 ]

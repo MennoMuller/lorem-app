@@ -20,7 +20,19 @@ class App extends React.Component {
   state = {
     user: {},
     tasks: [],
-    websites: []
+    websites: [],
+    date: new Date()
+  };
+
+  tick = () => {
+    this.setState({ date: new Date() });
+  };
+
+  handleUser = (user) => {
+    let userObject = JSON.parse(user);
+    this.setState({
+      user: userObject
+    });
   };
 
   handleTasks = (tasks) => {
@@ -30,15 +42,115 @@ class App extends React.Component {
     });
   };
 
+  handleWebsites = (sites) => {
+    let sitesObject = JSON.parse(sites);
+    this.setState({
+      websites: sitesObject
+    });
+  };
+
+  userJson = `{
+  "id": 1,
+  "username": "Menno Muller",
+  "email": "menno.muller@itvitaelearning.nl",
+  "password": "ThisIsMyPa$$word123",
+  "avatar": "img/avatar.jpg"
+}`;
+
+  tasksJson = `[
+  {
+    "id": 1,
+    "name": "Do something",
+    "category": "Social",
+    "deadline_date": "2023-02-01",
+    "deadline_time": "13:30",
+    "complete": false,
+    "user_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Do something else",
+    "category": "Misc",
+    "deadline_date": "2023-02-22",
+    "complete": true,
+    "user_id": 1
+  },
+  {
+    "id": 3,
+    "name": "Do something without a deadline",
+    "category": "Misc",
+    "complete": false,
+    "user_id": 1
+  },
+  {
+    "id": 4,
+    "name": "Do something for school",
+    "category": "School",
+    "deadline_date": "2023-02-01",
+    "deadline_time": "13:30",
+    "complete": false,
+    "user_id": 1
+  },
+  {
+    "id": 5,
+    "name": "Do something at home",
+    "category": "Home",
+    "deadline_date": "2023-02-01",
+    "deadline_time": "13:30",
+    "complete": false,
+    "user_id": 1
+  }
+]
+`;
+
+  websitesJson = `[
+  {
+    "id": 1,
+    "url": "https://www.google.com",
+    "name": "Google",
+    "description": "Search engine.",
+    "clicks": 10,
+    "icon": "https://www.google.com/favicon.ico",
+    "user_id": 1
+  },
+  {
+    "id": 2,
+    "url": "https://stackoverflow.com",
+    "name": "Stack Overflow",
+    "description": "Answers to programming questions",
+    "clicks": 15,
+    "icon": "https://stackoverflow.com/favicon.ico",
+    "user_id": 1
+  },
+  {
+    "id": 3,
+    "url": "https://www.w3schools.com",
+    "name": "W3Schools",
+    "description": "Source of information about programming.",
+    "clicks": 20,
+    "icon": "https://www.w3schools.com/favicon.ico",
+    "user_id": 1
+  }
+]`;
+
+  componentDidMount() {
+    this.handleUser(this.userJson);
+    this.handleWebsites(this.websitesJson);
+    this.handleTasks(this.tasksJson);
+  }
+
   render() {
     return (
       <div className="app-grid">
-        <Header />
+        <Header
+          date={this.state.date}
+          tick={this.tick}
+        />
         <div className="sidebar">
           <Logo />
           <Avatar
             image={avatar}
-            username="Menno Muller"
+            username={this.state.user.username}
           />
           <nav>
             <ul>
