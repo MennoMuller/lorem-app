@@ -24,6 +24,10 @@ class App extends React.Component {
     date: new Date()
   };
 
+  toggleComplete = (index) => {
+    console.log(index + " completeness toggle");
+  };
+
   tick = () => {
     this.setState({ date: new Date() });
   };
@@ -158,6 +162,7 @@ class App extends React.Component {
                 <NavLink to="/">
                   <img
                     src={dashboardIcon}
+                    alt=""
                     className="nav-icon"
                   />
                   <span className="nav-text">
@@ -169,6 +174,7 @@ class App extends React.Component {
                 <NavLink to="/tasks">
                   <img
                     src={tasksIcon}
+                    alt=""
                     className="nav-icon"
                   />
                   <span className="nav-text">Tasks</span>
@@ -178,6 +184,7 @@ class App extends React.Component {
                 <NavLink to="/websites">
                   <img
                     src={websitesIcon}
+                    alt=""
                     className="nav-icon"
                   />
                   <span className="nav-text">Websites</span>
@@ -187,6 +194,7 @@ class App extends React.Component {
                 <NavLink to="/weather">
                   <img
                     src={weatherIcon}
+                    alt=""
                     className="nav-icon"
                   />
                   <span className="nav-text">Weather</span>
@@ -202,7 +210,13 @@ class App extends React.Component {
           />
           <Route
             path="/tasks"
-            element={<Tasks />}
+            element={
+              <Tasks
+                tasks={this.state.tasks}
+                toggleComplete={this.toggleComplete}
+                date={this.state.date}
+              />
+            }
           />
           <Route
             path="/websites"

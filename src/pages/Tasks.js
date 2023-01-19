@@ -1,4 +1,6 @@
 import React from "react";
+import TasksCompleted from "../blocks/TasksCompleted";
+import TasksMain from "../blocks/TasksMain";
 import TasksProgress from "../blocks/TasksProgress";
 
 const Tasks = (props) => {
@@ -6,15 +8,20 @@ const Tasks = (props) => {
     <div className="main-wrapper">
       <h1>Tasks</h1>
       <div className="main-grid">
-        <div className="grid-item item-a">My tasks</div>
+        <TasksMain
+          tasks={props.tasks}
+          toggleComplete={props.toggleComplete}
+          date={props.date}
+        />
         <TasksProgress
           tasksLeft={-2}
           completedTasks={13}
           totalTasks={12}
         />
-        <div className="grid-item item-c">
-          Finished tasks
-        </div>
+        <TasksCompleted
+          tasks={props.tasks}
+          toggleComplete={props.toggleComplete}
+        />
       </div>
     </div>
   );

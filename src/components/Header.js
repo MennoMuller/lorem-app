@@ -12,35 +12,39 @@ class Header extends React.Component {
     clearInterval(this.timerID);
   }
 
-  getDate = () => {
+  getDate = (date) => {
     return (
-      this.props.date.getDate() +
+      date.getDate() +
       "/" +
-      (this.props.date.getMonth() + 1) +
+      (date.getMonth() + 1) +
       "/" +
-      this.props.date.getFullYear()
+      date.getFullYear()
     );
   };
 
-  getTime = () => {
+  getTime = (date) => {
     return (
-      this.props.date.getHours() +
+      date.getHours() +
       ":" +
-      (this.props.date.getMinutes() >= 10
-        ? this.props.date.getMinutes()
-        : "0" + this.state.date.getMinutes()) +
+      (date.getMinutes() >= 10
+        ? date.getMinutes()
+        : "0" + date.getMinutes()) +
       ":" +
-      (this.props.date.getSeconds() >= 10
-        ? this.props.date.getSeconds()
-        : "0" + this.props.date.getSeconds())
+      (date.getSeconds() >= 10
+        ? date.getSeconds()
+        : "0" + date.getSeconds())
     );
   };
 
   render() {
     return (
       <header>
-        <span className="date">{this.getDate()}</span>
-        <span className="time">{this.getTime()}</span>
+        <span className="date">
+          {this.getDate(this.props.date)}
+        </span>
+        <span className="time">
+          {this.getTime(this.props.date)}
+        </span>
       </header>
     );
   }
