@@ -36,6 +36,7 @@
   padding: 0;
   height: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .meatballs-menu {
@@ -72,6 +73,10 @@
   border-radius: 50%;
   border: solid 1px currentColor;
   background-color: currentColor;
+}
+
+.menu-button:hover .meatballs-menu {
+  color: rgb(79, 79, 79);
 }
 
 /* Custom Checkmark */
@@ -146,4 +151,37 @@
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+/* OPTIONS MENU */
+
+.item-menu {
+  grid-row: 1;
+  grid-column: 2;
+  position: absolute;
+  justify-self: end;
+  z-index: 1;
+  background-color: black;
+  border-radius: 10px;
+  padding: 0;
+  list-style-type: none;
+  translate: 3.5rem 15px;
+}
+
+.menu-option {
+  border: none;
+  background: none;
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.menu-option:hover {
+  background-color: rgba(128, 128, 128, 0.3);
+}
+
+.menu-option:active {
+  background-color: rgba(128, 128, 128, 0.45);
 }

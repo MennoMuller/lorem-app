@@ -4,7 +4,7 @@ import TaskItem from "../components/TaskItem";
 class TasksMain extends React.Component {
   render() {
     return (
-      <div className="grid-item item-a list-block">
+      <div className="grid-item item-a">
         <h2>My tasks</h2>
         <div className="list-wrapper completed-tasks">
           {this.props.tasks.map((task, index) => (
