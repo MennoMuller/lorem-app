@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
 import ModifyTaskMenu from "./ModifyTaskMenu";
-import "./TaskItem.css";
+import "./ListItem.css";
 
 const TaskItem = (props) => {
   let timeLeft;
@@ -21,7 +21,9 @@ const TaskItem = (props) => {
   return (
     <div
       className={
-        timeLeft < 0 ? "task-item overdue" : "task-item"
+        timeLeft < 0
+          ? "list-item task-item overdue"
+          : "list-item task-item"
       }
     >
       <div className="task-info">
