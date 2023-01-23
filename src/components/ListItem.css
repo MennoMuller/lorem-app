@@ -57,10 +57,10 @@
 .meatballs-menu {
   color: #000;
   position: absolute;
-  margin-left: 0px;
-  margin-top: 3px;
-  width: 2px;
-  height: 2px;
+  margin-left: 9px;
+  margin-top: 9px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   border: solid 1px currentColor;
   background-color: currentColor;
@@ -267,7 +267,7 @@
   margin: 0;
 }
 
-.site-icon {
+img .site-icon {
   width: 30px;
   height: 30px;
   object-fit: cover;
