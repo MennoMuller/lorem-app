@@ -1,11 +1,16 @@
 import React from "react";
+import DashTasks from "../blocks/DashTasks";
 
 const Dashboard = (props) => {
   return (
     <div className="main-wrapper">
       <h1>Dashboard</h1>
       <div className="main-grid">
-        <div className="grid-item item-a">My tasks</div>
+        <DashTasks
+          tasks={props.tasks}
+          date={props.date}
+          compareTasks={props.compareTasks}
+        />
         <div className="grid-item item-b">
           My favorite websites
         </div>

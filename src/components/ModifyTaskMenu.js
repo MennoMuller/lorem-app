@@ -10,7 +10,7 @@ class ModifyTaskMenu extends React.Component {
         <form>
           <div className="form-grid">
             <div className="form-field task-name">
-              <label for="name">
+              <label htmlFor="name">
                 Name task <span className="red">*</span>
               </label>
               <input
@@ -21,7 +21,7 @@ class ModifyTaskMenu extends React.Component {
               />
             </div>
             <div className="form-field task-category">
-              <label for="category">
+              <label htmlFor="category">
                 Category <span className="red">*</span>
               </label>
               <select
@@ -55,7 +55,7 @@ class ModifyTaskMenu extends React.Component {
               </select>
             </div>
             <div className="form-field task-deadline-date">
-              <label for="deadline_date">
+              <label htmlFor="deadline_date">
                 Deadline date
               </label>
               <input
@@ -66,7 +66,7 @@ class ModifyTaskMenu extends React.Component {
               />
             </div>
             <div className="form-field task-deadline-time">
-              <label for="deadline_time">
+              <label htmlFor="deadline_time">
                 Deadline time
               </label>
               <input

@@ -24,6 +24,42 @@ class App extends React.Component {
     date: new Date()
   };
 
+  compareTasks(a, b) {
+    if (!a.deadline_date) {
+      if (!b.deadline_date) {
+        return 0;
+      } else {
+        return 1;
+      }
+    }
+    if (!b.deadline_date) {
+      return -1;
+    }
+    let aDeadline, bDeadline;
+    if (a.deadline_time) {
+      aDeadline = Date.parse(
+        a.deadline_date + " " + a.deadline_time
+      );
+    } else {
+      aDeadline = Date.parse(a.deadline_date);
+    }
+    if (b.deadline_time) {
+      bDeadline = Date.parse(
+        b.deadline_date + " " + b.deadline_time
+      );
+    } else {
+      bDeadline = Date.parse(b.deadline_date);
+    }
+
+    if (aDeadline < bDeadline) {
+      return -1;
+    }
+    if (aDeadline > bDeadline) {
+      return 1;
+    }
+    return 0;
+  }
+
   toggleComplete = (index) => {
     console.log(index + " completeness toggle");
   };
@@ -66,7 +102,7 @@ class App extends React.Component {
     "id": 1,
     "name": "Do something",
     "category": "Social",
-    "deadline_date": "2023-02-01",
+    "deadline_date": "2023-01-25",
     "deadline_time": "13:30",
     "complete": false,
     "user_id": 1
@@ -90,8 +126,8 @@ class App extends React.Component {
     "id": 4,
     "name": "Do something for school",
     "category": "School",
-    "deadline_date": "2023-02-01",
-    "deadline_time": "13:30",
+    "deadline_date": "2023-02-22",
+    
     "complete": false,
     "user_id": 1
   },
@@ -99,8 +135,25 @@ class App extends React.Component {
     "id": 5,
     "name": "Do something at home",
     "category": "Home",
-    "deadline_date": "2023-02-01",
+    "deadline_date": "2023-02-10",
     "deadline_time": "13:30",
+    "complete": false,
+    "user_id": 1
+  },
+  {
+    "id": 6,
+    "name": "Do something in the past",
+    "category": "Home",
+    "deadline_date": "2023-01-19",
+    "deadline_time": "18:30",
+    "complete": false,
+    "user_id": 1
+  },{
+    "id": 7,
+    "name": "Do something today",
+    "category": "Home",
+    "deadline_date": "2023-01-20",
+    "deadline_time": "18:30",
     "complete": false,
     "user_id": 1
   }
@@ -206,7 +259,13 @@ class App extends React.Component {
         <Routes>
           <Route
             path="/"
-            element={<Dashboard />}
+            element={
+              <Dashboard
+                tasks={this.state.tasks}
+                date={this.state.date}
+                compareTasks={this.compareTasks}
+              />
+            }
           />
           <Route
             path="/tasks"
@@ -215,6 +274,7 @@ class App extends React.Component {
                 tasks={this.state.tasks}
                 toggleComplete={this.toggleComplete}
                 date={this.state.date}
+                compareTasks={this.compareTasks}
               />
             }
           />

@@ -5,6 +5,12 @@
   grid-template-columns: 1fr max-content;
   grid-template-rows: min-content 1fr;
   padding: 5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.overdue {
+  background-color: rgba(240, 128, 128, 0.3);
 }
 
 .task-info {
@@ -156,6 +162,7 @@
 /* OPTIONS MENU */
 
 .item-menu {
+  width: max-content;
   grid-row: 1;
   grid-column: 2;
   position: absolute;
@@ -165,7 +172,9 @@
   border-radius: 10px;
   padding: 0;
   list-style-type: none;
-  translate: 3.5rem 15px;
+
+  margin-top: 15px;
+  /* translate: 3.5rem 15px; */
 }
 
 .menu-option {
@@ -184,4 +193,54 @@
 
 .menu-option:active {
   background-color: rgba(128, 128, 128, 0.45);
+}
+
+/*DEADLINE INFO*/
+
+.deadline-info {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.deadline-info .info-box {
+  display: flex;
+  align-items: center;
+}
+
+.deadline-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  font-weight: bold;
+  border-radius: 50%;
+  margin-right: 10px;
+  color: white;
+}
+
+.red-icon {
+  background-color: red;
+}
+
+.yellow-icon {
+  background-color: yellow;
+}
+
+.green-icon {
+  background-color: lawngreen;
+  color: lawngreen;
+}
+
+.deadline-warning {
+  font-size: medium;
+}
+
+.deadline {
+  font-size: smaller;
+  margin-right: 5px;
 }

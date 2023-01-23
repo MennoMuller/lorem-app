@@ -288,3 +288,47 @@ form p {
   font-size: small;
   margin: 0;
 }
+
+/* FILTER BUTTONS */
+.filters-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.filter-button {
+  color: gainsboro;
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+}
+
+.active-filter {
+  background-color: gainsboro;
+  color: black;
+}
+
+.add-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: none;
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+}
+
+/* DASHBOARD LINKS*/
+.dash-header-box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}

@@ -5,12 +5,23 @@ import ModifyTaskMenu from "./ModifyTaskMenu";
 import "./TaskItem.css";
 
 const TaskItem = (props) => {
+  let timeLeft;
+  if (props.deadline_date) {
+    let deadlineNr = Date.parse(props.deadline_date);
+    if (props.date) {
+      timeLeft = Math.ceil(
+        (deadlineNr - props.date.valueOf()) /
+          (1000 * 3600 * 24)
+      );
+    }
+  }
+
   const [popup, setPopup] = useState(false);
   const [menu, setMenu] = useState(false);
   return (
     <div
       className={
-        props.complete ? "task-item complete" : "task-item"
+        timeLeft < 0 ? "task-item overdue" : "task-item"
       }
     >
       <div className="task-info">
@@ -18,6 +29,48 @@ const TaskItem = (props) => {
           {props.category}
         </span>
         <h4 className="task-label">{props.name}</h4>
+        {props.complete ? (
+          ""
+        ) : (
+          <div className="deadline-info">
+            <div className="info-box">
+              <span
+                className={
+                  "deadline-icon " +
+                  (props.deadline_date
+                    ? timeLeft < 1
+                      ? "red-icon"
+                      : timeLeft < 7
+                      ? "yellow-icon"
+                      : "green-icon"
+                    : "green-icon")
+                }
+              >
+                !
+              </span>
+              <span className="deadline-warning">
+                {props.deadline_date
+                  ? timeLeft < 0
+                    ? "Overdue"
+                    : "Deadline " +
+                      (timeLeft < 1
+                        ? "today"
+                        : timeLeft < 7
+                        ? "this week"
+                        : "in " + timeLeft + " days")
+                  : "No deadline"}
+              </span>
+            </div>
+            <div className="info-box">
+              <span className="deadline">
+                {props.deadline_date}
+              </span>
+              <span className="deadline">
+                {props.deadline_time}
+              </span>
+            </div>
+          </div>
+        )}
       </div>
       <button
         className="menu-button"

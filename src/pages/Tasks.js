@@ -12,15 +12,40 @@ const Tasks = (props) => {
           tasks={props.tasks}
           toggleComplete={props.toggleComplete}
           date={props.date}
+          compareTasks={props.compareTasks}
         />
         <TasksProgress
-          tasksLeft={-2}
-          completedTasks={13}
-          totalTasks={12}
+          tasksLeft={
+            props.tasks
+              .filter((task) => !task.complete)
+              .filter((task) => {
+                if (task.deadline_date) {
+                  let deadlineNr = Date.parse(
+                    task.deadline_date
+                  );
+                  if (props.date) {
+                    return (
+                      Math.ceil(
+                        (deadlineNr -
+                          props.date.valueOf()) /
+                          (1000 * 3600 * 24)
+                      ) <= 1
+                    );
+                  }
+                }
+                return false;
+              }).length
+          }
+          completedTasks={
+            props.tasks.filter((task) => task.complete)
+              .length
+          }
+          totalTasks={props.tasks.length}
         />
         <TasksCompleted
           tasks={props.tasks}
           toggleComplete={props.toggleComplete}
+          compareTasks={props.compareTasks}
         />
       </div>
     </div>
