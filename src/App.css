@@ -323,9 +323,10 @@ form {
 
 .form-grid {
   display: grid;
-  grid-auto-columns: 300px;
+  grid-template-columns: 300px 300px;
   grid-auto-rows: 1fr;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .red {
@@ -354,7 +355,8 @@ form {
   border-radius: 5px;
 }
 
-.task-name {
+.task-name,
+.site-name {
   grid-row: 1;
   grid-column-start: 1;
   grid-column-end: span 2;
@@ -373,6 +375,23 @@ form {
 .task-deadline-time {
   grid-row: 3;
   grid-column: 2;
+}
+
+.site-url {
+  grid-row: 2;
+  grid-column-start: 1;
+  grid-column-end: span 2;
+}
+
+.site-icon-field {
+  grid-row: 3;
+  grid-column: 1;
+}
+
+.site-description-field {
+  grid-row: 4;
+  grid-column-start: 1;
+  grid-column-end: span 2;
 }
 
 .submit-button {

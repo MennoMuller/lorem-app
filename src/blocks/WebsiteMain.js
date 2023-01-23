@@ -1,5 +1,6 @@
 import React from "react";
 import ClickAwayListener from "react-click-away-listener";
+import ModifySiteMenu from "../components/ModifySiteMenu";
 import ModifyTaskMenu from "../components/ModifyTaskMenu";
 import SiteItem from "../components/SiteItem";
 
@@ -36,7 +37,7 @@ class WebsiteMain extends React.Component {
             onClickAway={() => (this.menu = false)}
           >
             <div>
-              <ModifyTaskMenu modify={false} />
+              <ModifySiteMenu modify={false} />
             </div>
           </ClickAwayListener>
         )}
