@@ -1,9 +1,10 @@
 .list-item {
   display: grid;
-  grid-template-columns: 1fr max-content;
+  grid-template-columns: 1fr 25px;
   grid-template-rows: min-content 1fr;
   position: relative;
   padding: 5px;
+  max-width: 100%;
 }
 
 .site-item {

@@ -187,6 +187,24 @@ class App extends React.Component {
     "clicks": 20,
     "icon": "https://www.w3schools.com/favicon.ico",
     "user_id": 1
+  },
+  {
+    "id": 4,
+    "url": "https://www.w3schools.com",
+    "name": "W3Schools 2",
+    "description": "Source of information about programming.",
+    "clicks": 20,
+    "icon": "https://www.w3schools.com/favicon.ico",
+    "user_id": 1
+  },
+  {
+    "id": 5,
+    "url": "https://www.w3schools.com",
+    "name": "W3Schools 3",
+    "description": "Source of information about programming.",
+    "clicks": 20,
+    "icon": "https://www.w3schools.com/favicon.ico",
+    "user_id": 1
   }
 ]`;
 
@@ -204,11 +222,13 @@ class App extends React.Component {
           tick={this.tick}
         />
         <div className="sidebar">
-          <Logo />
-          <Avatar
-            image={avatar}
-            username={this.state.user.username}
-          />
+          <div className="sidebar-header">
+            <Logo />
+            <Avatar
+              image={avatar}
+              username={this.state.user.username}
+            />
+          </div>
           <nav>
             <ul>
               <li>
