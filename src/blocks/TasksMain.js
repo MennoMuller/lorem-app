@@ -6,41 +6,7 @@ import ModifyTaskMenu from "../components/ModifyTaskMenu";
 class TasksMain extends React.Component {
   filter = null;
   menu = false;
-  compare(a, b) {
-    if (!a.deadline_date) {
-      if (!b.deadline_date) {
-        return 0;
-      } else {
-        return 1;
-      }
-    }
-    if (!b.deadline_date) {
-      return -1;
-    }
-    let aDeadline, bDeadline;
-    if (a.deadline_time) {
-      aDeadline = Date.parse(
-        a.deadline_date + " " + a.deadline_time
-      );
-    } else {
-      aDeadline = Date.parse(a.deadline_date);
-    }
-    if (b.deadline_time) {
-      bDeadline = Date.parse(
-        b.deadline_date + " " + b.deadline_time
-      );
-    } else {
-      bDeadline = Date.parse(b.deadline_date);
-    }
 
-    if (aDeadline < bDeadline) {
-      return -1;
-    }
-    if (aDeadline > bDeadline) {
-      return 1;
-    }
-    return 0;
-  }
   render() {
     return (
       <div className="grid-item item-a">
@@ -108,7 +74,7 @@ class TasksMain extends React.Component {
                 (task) => !task.complete
               )
           )
-            .sort(this.compare)
+            .sort(this.props.compareTasks)
             .map((task, index) => (
               <TaskItem
                 key={index}

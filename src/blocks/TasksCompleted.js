@@ -9,6 +9,7 @@ class TasksCompleted extends React.Component {
         <div className="list-wrapper">
           {this.props.tasks
             .filter((task) => task.complete)
+            .sort(this.props.compareTasks)
             .map((task, index) => (
               <TaskItem
                 key={index}
