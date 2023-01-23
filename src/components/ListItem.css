@@ -7,9 +7,9 @@
   max-width: 100%;
 }
 
-.site-item {
+/* .site-item {
   border: 1px solid black;
-}
+} */
 
 .task-item {
   border: 1px solid black;
@@ -264,4 +264,11 @@
   grid-column-start: 1;
   grid-column-end: span 2;
   max-width: 100%;
+  margin: 0;
+}
+
+.site-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
 }
