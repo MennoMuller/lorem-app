@@ -280,7 +280,9 @@ class App extends React.Component {
           />
           <Route
             path="/websites"
-            element={<Websites />}
+            element={
+              <Websites websites={this.state.websites} />
+            }
           />
           <Route
             path="/weather"

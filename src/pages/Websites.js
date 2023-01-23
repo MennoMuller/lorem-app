@@ -1,4 +1,5 @@
 import React from "react";
+import WebsiteClicks from "../blocks/WebsiteClicks";
 
 const Websites = (props) => {
   return (
@@ -8,7 +9,7 @@ const Websites = (props) => {
         <div className="grid-item item-a">
           My favorite websites
         </div>
-        <div className="grid-item item-b">Most clicks</div>
+        <WebsiteClicks websites={props.websites} />
         <div className="grid-item item-c">
           Random quote of the day
         </div>
