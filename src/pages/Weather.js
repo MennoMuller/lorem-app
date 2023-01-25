@@ -1,4 +1,6 @@
 import React from "react";
+import WeatherNow from "../blocks/WeatherNow";
+import "./Weather.css";
 
 const Weather = (props) => {
   return (
@@ -8,7 +10,14 @@ const Weather = (props) => {
         <div className="grid-item item-a">
           Weather forecast
         </div>
-        <div className="grid-item item-b">Weather now</div>
+        <WeatherNow
+          temperature={99}
+          feelsLike={-99}
+          icon="50d"
+          description="Microwave"
+          wind={98}
+          rain={10.5}
+        />
         <div className="grid-item item-c">Location</div>
       </div>
     </div>
