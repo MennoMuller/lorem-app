@@ -301,9 +301,11 @@ class App extends React.Component {
             path="/"
             element={
               <Dashboard
+                websites={this.state.websites}
                 tasks={this.state.tasks}
                 date={this.state.date}
                 compareTasks={this.compareTasks}
+                iconGetter={this.getDefaultIconUrl}
               />
             }
           />

@@ -76,7 +76,7 @@ header .time {
   object-fit: cover;
 }
 
-nav a {
+a {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -251,6 +251,10 @@ a.active {
   }
   nav ul li {
     margin: 0 10px;
+  }
+
+  .dash-sites-box .dash-site {
+    width: 50%;
   }
 }
 
@@ -462,6 +466,30 @@ form p {
 .dash-header-box {
   display: flex;
   justify-content: space-between;
+}
+
+.dash-header-box a {
+  text-decoration: underline;
+  color: blue;
+}
+.dash-header-box a:hover {
+  color: blueviolet;
+}
+
+.dash-sites-box {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dash-site {
+  width: 33%;
+  overflow: hidden;
+}
+
+.dash-site-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
 }
 
 /* QUOTE THINGY */

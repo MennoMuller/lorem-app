@@ -1,5 +1,6 @@
 import React from "react";
 import DashTasks from "../blocks/DashTasks";
+import DashWebsites from "../blocks/DashWebsites";
 
 const Dashboard = (props) => {
   return (
@@ -11,9 +12,10 @@ const Dashboard = (props) => {
           date={props.date}
           compareTasks={props.compareTasks}
         />
-        <div className="grid-item item-b">
-          My favorite websites
-        </div>
+        <DashWebsites
+          websites={props.websites}
+          iconGetter={props.iconGetter}
+        />
         <div className="grid-item item-c">Weather</div>
       </div>
     </div>

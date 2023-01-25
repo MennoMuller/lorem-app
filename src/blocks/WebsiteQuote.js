@@ -3,8 +3,8 @@ import React from "react";
 class WebsiteQuote extends React.Component {
   state = {
     quote: {
-      quote: "This is a random quote",
-      author: "Random Author"
+      quote: "Loading quote...",
+      author: "Quote API"
     }
   };
 
