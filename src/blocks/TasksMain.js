@@ -75,13 +75,13 @@ class TasksMain extends React.Component {
               )
           )
             .sort(this.props.compareTasks)
-            .map((task, index) => (
+            .map((task) => (
               <TaskItem
-                key={index}
+                key={task.id}
                 name={task.name}
                 category={task.category}
                 complete={task.complete}
-                index={index}
+                index={task.id}
                 toggleComplete={this.props.toggleComplete}
                 deadline_date={task.deadline_date}
                 deadline_time={task.deadline_time}

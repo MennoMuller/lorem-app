@@ -10,13 +10,13 @@ class TasksCompleted extends React.Component {
           {this.props.tasks
             .filter((task) => task.complete)
             .sort(this.props.compareTasks)
-            .map((task, index) => (
+            .map((task) => (
               <TaskItem
-                key={index}
+                key={task.id}
                 name={task.name}
                 category={task.category}
                 complete={task.complete}
-                index={index}
+                index={task.id}
                 toggleComplete={this.props.toggleComplete}
               />
             ))}

@@ -16,13 +16,15 @@ class WebsiteMain extends React.Component {
         <div className="list-wrapper">
           {this.props.websites
             .sort((a, b) => b.clicks - a.clicks)
-            .map((site, index) => (
+            .map((site) => (
               <SiteItem
-                key={index}
+                key={site.id}
                 name={site.name}
                 icon={site.icon}
-                index={index}
+                index={site.id}
                 description={site.description}
+                url={site.url}
+                iconGetter={this.props.iconGetter}
               />
             ))}
         </div>

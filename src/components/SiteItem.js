@@ -1,80 +1,93 @@
 import React from "react";
-import { useState } from "react";
 import ClickAwayListener from "react-click-away-listener";
-import ModifyTaskMenu from "./ModifyTaskMenu";
+import ModifySiteMenu from "./ModifySiteMenu";
 import "./ListItem.css";
 
-const SiteItem = (props) => {
-  const [popup, setPopup] = useState(false);
-  const [menu, setMenu] = useState(false);
-  return (
-    <div className="list-item site-item">
-      <a className="site-box">
-        <img
-          className="site-icon"
-          src={props.icon}
-        />
-        <h4 className="task-label">{props.name}</h4>
-      </a>
-      <p className="site-description">
-        {props.description}
-      </p>
-      <button
-        className="menu-button"
-        onClick={() => setPopup(true)}
-      >
-        <div className="meatballs-menu"></div>
-      </button>
-      {popup && (
-        <ClickAwayListener
-          onClickAway={() => setPopup(false)}
+class SiteItem extends React.Component {
+  render() {
+    let popup = false;
+    let menu = false;
+    return (
+      <div className="list-item site-item">
+        <a
+          className="site-box"
+          href={
+            this.props.url.includes("http")
+              ? this.props.url
+              : "http://" + this.props.url
+          }
+          onClick={() => {
+            console.log(this.props.index + " was clicked");
+          }}
         >
-          <div className="item-menu">
-            <li>
-              <button
-                className="menu-option"
-                onClick={() =>
-                  console.log(
-                    "delete website " + props.index
-                  )
-                }
-              >
-                Delete website
-              </button>
-            </li>
-            <li>
-              <button
-                className="menu-option"
-                onClick={() => {
-                  setMenu(true);
-                  setPopup(false);
-                }}
-              >
-                Modify website
-              </button>
-            </li>
-          </div>
-        </ClickAwayListener>
-      )}
+          <img
+            className="site-icon"
+            src={
+              this.props.icon
+                ? this.props.icon
+                : this.props.iconGetter(this.props.url)
+            }
+          />
+          <h4 className="task-label">{this.props.name}</h4>
+        </a>
+        <p className="site-description">
+          {this.props.description}
+        </p>
+        <button
+          className="menu-button"
+          onClick={() => (this.popup = true)}
+        >
+          <div className="meatballs-menu"></div>
+        </button>
+        {this.popup && (
+          <ClickAwayListener
+            onClickAway={() => (this.popup = false)}
+          >
+            <div className="item-menu">
+              <li>
+                <button
+                  className="menu-option"
+                  onClick={() =>
+                    console.log(
+                      "delete website " + this.props.index
+                    )
+                  }
+                >
+                  Delete website
+                </button>
+              </li>
+              <li>
+                <button
+                  className="menu-option"
+                  onClick={() => {
+                    this.menu = true;
+                    this.popup = false;
+                  }}
+                >
+                  Modify website
+                </button>
+              </li>
+            </div>
+          </ClickAwayListener>
+        )}
 
-      {menu && (
-        <ClickAwayListener
-          onClickAway={() => setMenu(false)}
-        >
-          <div>
-            <ModifyTaskMenu
-              name={props.name}
-              category={props.category}
-              deadline_date={props.deadline_date}
-              deadline_time={props.deadline_time}
-              date={props.date}
-              modify={true}
-            />
-          </div>
-        </ClickAwayListener>
-      )}
-    </div>
-  );
-};
+        {this.menu && (
+          <ClickAwayListener
+            onClickAway={() => this.menu == false}
+          >
+            <div>
+              <ModifySiteMenu
+                name={this.props.name}
+                url={this.props.url}
+                icon={this.props.icon}
+                modify={true}
+              />
+            </div>
+          </ClickAwayListener>
+        )}
+      </div>
+    );
+  }
+}
 
 export default SiteItem;

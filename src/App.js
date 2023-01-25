@@ -24,6 +24,23 @@ class App extends React.Component {
     date: new Date()
   };
 
+  getDefaultIconUrl = (url) => {
+    const firstPoint = url.indexOf(".");
+    let secondPoint = url.indexOf(".", firstPoint + 1);
+    if (
+      url.substring(firstPoint, secondPoint).includes("/")
+    ) {
+      secondPoint = firstPoint;
+    }
+    const baseEnd = url.indexOf("/", secondPoint);
+    let urlBase =
+      baseEnd == -1 ? url : url.substring(0, baseEnd);
+    if (!urlBase.includes("http")) {
+      urlBase = "http://" + urlBase;
+    }
+    return urlBase + "/favicon.ico";
+  };
+
   compareTasks(a, b) {
     if (!a.deadline_date) {
       if (!b.deadline_date) {
@@ -163,47 +180,50 @@ class App extends React.Component {
   websitesJson = `[
   {
     "id": 1,
-    "url": "https://www.google.com",
+    "url": "google.com",
     "name": "Google",
     "description": "Search engine.",
     "clicks": 10,
-    "icon": "https://www.google.com/favicon.ico",
     "user_id": 1
   },
   {
     "id": 2,
-    "url": "https://stackoverflow.com",
+    "url": "stackoverflow.com",
     "name": "Stack Overflow",
     "description": "Answers to programming questions",
     "clicks": 15,
-    "icon": "https://stackoverflow.com/favicon.ico",
     "user_id": 1
   },
   {
     "id": 3,
-    "url": "https://www.w3schools.com",
+    "url": "w3schools.com",
     "name": "W3Schools",
     "description": "Source of information about programming.",
     "clicks": 20,
-    "icon": "https://www.w3schools.com/favicon.ico",
     "user_id": 1
   },
   {
     "id": 4,
-    "url": "https://www.w3schools.com",
-    "name": "W3Schools 2",
-    "description": "Source of information about programming.",
-    "clicks": 20,
-    "icon": "https://www.w3schools.com/favicon.ico",
+    "url": "go.com",
+    "name": "Go.com",
+    "description": "Website without https, included for testing purposes",
+    "clicks": 3,
     "user_id": 1
   },
   {
     "id": 5,
-    "url": "https://www.w3schools.com",
-    "name": "W3Schools 3",
-    "description": "Source of information about programming.",
-    "clicks": 20,
-    "icon": "https://www.w3schools.com/favicon.ico",
+    "url": "reactjs.org",
+    "name": "ReactJS",
+    "description": "Site without www, included for testing purposes",
+    "clicks": 4,
+    "user_id": 1
+  },
+  {
+    "id": 6,
+    "url": "computer.howstuffworks.com/internet/basics/question180.htm",
+    "name": "HowStuffWorks",
+    "description": "Site with something other than www, included for testing purposes",
+    "clicks": 2,
     "user_id": 1
   }
 ]`;
@@ -301,7 +321,10 @@ class App extends React.Component {
           <Route
             path="/websites"
             element={
-              <Websites websites={this.state.websites} />
+              <Websites
+                websites={this.state.websites}
+                iconGetter={this.getDefaultIconUrl}
+              />
             }
           />
           <Route

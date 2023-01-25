@@ -267,8 +267,8 @@
   margin: 0;
 }
 
-img .site-icon {
-  width: 30px;
-  height: 30px;
+.site-icon {
+  width: 20px;
+  height: 20px;
   object-fit: cover;
 }

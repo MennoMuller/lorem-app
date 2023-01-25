@@ -10,11 +10,13 @@ class WebsiteClicks extends React.Component {
           {this.props.websites
             .sort((a, b) => b.clicks - a.clicks)
             .slice(0, 4)
-            .map((site, index) => (
+            .map((site) => (
               <ClicksSquare
-                key={index}
+                key={site.id}
+                url={site.url}
                 icon={site.icon}
                 clicks={site.clicks}
+                iconGetter={this.props.iconGetter}
               />
             ))}
         </div>

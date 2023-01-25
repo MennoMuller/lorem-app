@@ -39,7 +39,7 @@ class ModifySiteMenu extends React.Component {
                 type="file"
                 id="icon"
                 name="icon"
-                value={this.props.icon}
+                // value={this.props.icon}
               />
             </div>
             <div className="form-field site-description-field">
