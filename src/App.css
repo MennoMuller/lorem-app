@@ -76,7 +76,7 @@ header .time {
   object-fit: cover;
 }
 
-a {
+nav a {
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -161,6 +161,18 @@ a.active {
 
 .orange {
   background-color: navajowhite;
+}
+
+.blue {
+  background-color: blue;
+  color: white;
+}
+
+.quote {
+  margin-bottom: 0;
+}
+.quote-author {
+  margin-top: 0;
 }
 
 @media screen and (max-width: 480px) {
@@ -450,4 +462,20 @@ form p {
 .dash-header-box {
   display: flex;
   justify-content: space-between;
+}
+
+/* QUOTE THINGY */
+
+.tss-span {
+  z-index: 50;
+  margin-top: auto;
+  font-weight: bold;
+  display: inline-flex;
+}
+
+.tss-a {
+  font-size: 0.4rem;
+  color: #aaf;
+  margin-left: 4px;
+  vertical-align: middle;
 }

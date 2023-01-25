@@ -1,6 +1,7 @@
 import React from "react";
 import WebsiteClicks from "../blocks/WebsiteClicks";
 import WebsiteMain from "../blocks/WebsiteMain";
+import WebsiteQuote from "../blocks/WebsiteQuote";
 
 const Websites = (props) => {
   return (
@@ -15,9 +16,7 @@ const Websites = (props) => {
           websites={props.websites}
           iconGetter={props.iconGetter}
         />
-        <div className="grid-item item-c">
-          Random quote of the day
-        </div>
+        <WebsiteQuote />
       </div>
     </div>
   );
