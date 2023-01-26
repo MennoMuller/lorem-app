@@ -1,5 +1,6 @@
 import React from "react";
 import DashTasks from "../blocks/DashTasks";
+import DashWeather from "../blocks/DashWeather";
 import DashWebsites from "../blocks/DashWebsites";
 
 const Dashboard = (props) => {
@@ -16,7 +17,18 @@ const Dashboard = (props) => {
           websites={props.websites}
           iconGetter={props.iconGetter}
         />
-        <div className="grid-item item-c">Weather</div>
+        <DashWeather
+          temperature={props.weather.main.temp}
+          feelsLike={props.weather.main.feels_like}
+          icon={props.weather.weather[0].icon}
+          description={props.weather.weather[0].main}
+          wind={props.weather.wind.speed}
+          rain={
+            props.weather.rain
+              ? props.weather.rain["1h"]
+              : 0
+          }
+        />
       </div>
     </div>
   );

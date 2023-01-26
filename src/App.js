@@ -1,21 +1,15 @@
 import React from "react";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import Header from "./components/Header";
-import Logo from "./components/Logo";
-import Avatar from "./components/Avatar";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import Websites from "./pages/Websites";
 import Weather from "./pages/Weather";
+import Sidebar from "./components/Sidebar";
 
 import avatar from "./img/avatar.jpg";
-import dashboardIcon from "./img/dashboard.png";
-import tasksIcon from "./img/tasks.png";
-import websitesIcon from "./img/websites.png";
-import weatherIcon from "./img/weather.png";
-import Sidebar from "./components/Sidebar";
 
 class App extends React.Component {
   state = {
@@ -217,6 +211,7 @@ class App extends React.Component {
             path="/"
             element={
               <Dashboard
+                weather={this.state.current}
                 websites={this.state.websites}
                 tasks={this.state.tasks}
                 date={this.state.date}
