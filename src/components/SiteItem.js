@@ -19,6 +19,7 @@ class SiteItem extends React.Component {
           onClick={() => {
             console.log(this.props.index + " was clicked");
           }}
+          target="_blank"
         >
           <img
             className="site-icon"
@@ -73,7 +74,7 @@ class SiteItem extends React.Component {
 
         {this.menu && (
           <ClickAwayListener
-            onClickAway={() => this.menu == false}
+            onClickAway={() => (this.menu = false)}
           >
             <div>
               <ModifySiteMenu

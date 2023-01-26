@@ -23,7 +23,7 @@ class App extends React.Component {
     },
     current: {
       main: { temp: "", feels_like: "" },
-      weather: [{ icon: "", main: "" }],
+      weather: [{ icon: "04d", main: "" }],
       wind: { speed: "" }
     },
     predictions: [],
@@ -96,12 +96,11 @@ class App extends React.Component {
   handleUser = () => {
     fetch("data/user.json")
       .then((response) => response.json())
-      .then((data) => {
+      .then((data) =>
         this.setState({
           user: data
-        });
-        this.handleLocationUpdate(data.city);
-      });
+        })
+      );
   };
 
   handleTasks = () => {
@@ -133,7 +132,6 @@ class App extends React.Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data[0]);
         this.setState(
           {
             geo: data[0]
@@ -160,7 +158,6 @@ class App extends React.Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           current: data
         });
@@ -181,7 +178,6 @@ class App extends React.Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.list);
         this.setState({ predictions: data.list });
       })
       .catch((error) => {
@@ -189,10 +185,28 @@ class App extends React.Component {
       });
   };
 
+  getCurrentCity = (lat, lon) => {
+    fetch(
+      `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=` +
+        this.APIKey
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.handleLocationUpdate(data[0].name);
+      });
+  };
+
   componentDidMount() {
     this.handleUser();
     this.handleWebsites();
     this.handleTasks();
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.getCurrentCity(
+        position.coords.latitude,
+        position.coords.longitude
+      );
+    });
   }
 
   render() {

@@ -12,6 +12,7 @@ const ClicksSquare = (props) => {
       onClick={() => {
         console.log(props.index + " was clicked");
       }}
+      target="_blank"
     >
       <img
         className="square-icon"
