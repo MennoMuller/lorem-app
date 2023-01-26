@@ -3,7 +3,7 @@ import React from "react";
 class TasksProgress extends React.Component {
   render() {
     return (
-      <div className="grid-item item-b orange">
+      <div className="grid-item item-b paleorange">
         <h2>Progress</h2>
         <div className="squares-wrapper">
           <div className="square">

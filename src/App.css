@@ -159,13 +159,21 @@ a.active {
   grid-column: 2;
 }
 
-.orange {
+.paleorange {
   background-color: navajowhite;
+}
+
+.orange {
+  background-color: orange;
 }
 
 .blue {
   background-color: blue;
   color: white;
+}
+
+.skyblue {
+  background-color: rgb(94, 94, 255);
 }
 
 .quote {

@@ -98,25 +98,35 @@ class App extends React.Component {
     this.setState({ date: new Date() });
   };
 
-  handleUser = (user) => {
-    let userObject = JSON.parse(user);
-    this.setState({
-      user: userObject
-    });
+  handleUser = () => {
+    fetch("data/user.json")
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({
+          user: data
+        });
+        this.handleLocationUpdate(data.city);
+      });
   };
 
-  handleTasks = (tasks) => {
-    let tasksObject = JSON.parse(tasks);
-    this.setState({
-      tasks: tasksObject
-    });
+  handleTasks = () => {
+    fetch("data/tasks.json")
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          tasks: data
+        })
+      );
   };
 
-  handleWebsites = (sites) => {
-    let sitesObject = JSON.parse(sites);
-    this.setState({
-      websites: sitesObject
-    });
+  handleWebsites = () => {
+    fetch("data/websites.json")
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          websites: data
+        })
+      );
   };
 
   handleLocationUpdate = (city) => {
@@ -184,132 +194,10 @@ class App extends React.Component {
       });
   };
 
-  userJson = `{
-  "id": 1,
-  "username": "Menno Muller",
-  "email": "menno.muller@itvitaelearning.nl",
-  "password": "ThisIsMyPa$$word123",
-  "avatar": "img/avatar.jpg"
-}`;
-
-  tasksJson = `[
-  {
-    "id": 1,
-    "name": "Do something",
-    "category": "Social",
-    "deadline_date": "2023-01-25",
-    "deadline_time": "13:30",
-    "complete": false,
-    "user_id": 1
-  },
-  {
-    "id": 2,
-    "name": "Do something else",
-    "category": "Misc",
-    "deadline_date": "2023-02-22",
-    "complete": true,
-    "user_id": 1
-  },
-  {
-    "id": 3,
-    "name": "Do something without a deadline",
-    "category": "Misc",
-    "complete": false,
-    "user_id": 1
-  },
-  {
-    "id": 4,
-    "name": "Do something for school",
-    "category": "School",
-    "deadline_date": "2023-02-22",
-    
-    "complete": false,
-    "user_id": 1
-  },
-  {
-    "id": 5,
-    "name": "Do something at home",
-    "category": "Home",
-    "deadline_date": "2023-02-10",
-    "deadline_time": "13:30",
-    "complete": false,
-    "user_id": 1
-  },
-  {
-    "id": 6,
-    "name": "Do something in the past",
-    "category": "Home",
-    "deadline_date": "2023-01-19",
-    "deadline_time": "18:30",
-    "complete": true,
-    "user_id": 1
-  },{
-    "id": 7,
-    "name": "Do something today",
-    "category": "Home",
-    "deadline_date": "2023-01-20",
-    "deadline_time": "18:30",
-    "complete": false,
-    "user_id": 1
-  }
-]
-`;
-
-  websitesJson = `[
-  {
-    "id": 1,
-    "url": "google.com",
-    "name": "Google",
-    "description": "Search engine.",
-    "clicks": 10,
-    "user_id": 1
-  },
-  {
-    "id": 2,
-    "url": "stackoverflow.com",
-    "name": "Stack Overflow",
-    "description": "Answers to programming questions",
-    "clicks": 15,
-    "user_id": 1
-  },
-  {
-    "id": 3,
-    "url": "w3schools.com",
-    "name": "W3Schools",
-    "description": "Source of information about programming.",
-    "clicks": 20,
-    "user_id": 1
-  },
-  {
-    "id": 4,
-    "url": "go.com",
-    "name": "Go.com",
-    "description": "Website without https, included for testing purposes",
-    "clicks": 3,
-    "user_id": 1
-  },
-  {
-    "id": 5,
-    "url": "reactjs.org",
-    "name": "ReactJS",
-    "description": "Site without www, included for testing purposes",
-    "clicks": 4,
-    "user_id": 1
-  },
-  {
-    "id": 6,
-    "url": "computer.howstuffworks.com/internet/basics/question180.htm",
-    "name": "HowStuffWorks",
-    "description": "Site with something other than www, included for testing purposes",
-    "clicks": 2,
-    "user_id": 1
-  }
-]`;
-
   componentDidMount() {
-    this.handleUser(this.userJson);
-    this.handleWebsites(this.websitesJson);
-    this.handleTasks(this.tasksJson);
+    this.handleUser();
+    this.handleWebsites();
+    this.handleTasks();
   }
 
   render() {

@@ -2,7 +2,13 @@ import React from "react";
 
 const WeatherNow = (props) => {
   return (
-    <div className="grid-item item-b">
+    <div
+      className={
+        props.temperature > 15
+          ? "grid-item item-b orange"
+          : "grid-item item-b skyblue"
+      }
+    >
       <h2>Weather now</h2>
 
       <div className="current-grid">
