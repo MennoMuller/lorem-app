@@ -18,7 +18,9 @@ const App = () => {
   const [geo, setGeo] = useState({
     name: "",
     state: "",
-    country: ""
+    country: "",
+    lat: 0,
+    lon: 0
   });
   const [current, setCurrent] = useState({
     main: { temp: "", feels_like: "" },
@@ -119,8 +121,6 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setGeo(data[0]);
-        handleWeatherUpdate();
-        handleForecastUpdate();
       })
 
       .catch((error) => {
@@ -187,6 +187,11 @@ const App = () => {
       );
     });
   }, []);
+
+  useEffect(() => {
+    handleWeatherUpdate();
+    handleForecastUpdate();
+  }, [geo]);
 
   return (
     <div className="app-grid">
