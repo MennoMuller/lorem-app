@@ -2,6 +2,7 @@ import React from "react";
 import ClickAwayListener from "react-click-away-listener";
 import TaskItem from "../components/TaskItem";
 import ModifyTaskMenu from "../components/ModifyTaskMenu";
+import FilterButton from "../components/FilterButton";
 
 class TasksMain extends React.Component {
   filter = null;
@@ -12,56 +13,31 @@ class TasksMain extends React.Component {
       <div className="grid-item item-a">
         <h2>My tasks</h2>
         <div className="filters-box">
-          <button
-            className={
-              this.filter == null
-                ? "filter-button active-filter"
-                : "filter-button"
-            }
-            onClick={() => (this.filter = null)}
-          >
-            All tasks
-          </button>
-          <button
-            className={
-              this.filter == "School"
-                ? "filter-button active-filter"
-                : "filter-button"
-            }
-            onClick={() => (this.filter = "School")}
-          >
-            School
-          </button>
-          <button
-            className={
-              this.filter == "Social"
-                ? "filter-button active-filter"
-                : "filter-button"
-            }
-            onClick={() => (this.filter = "Social")}
-          >
-            Social
-          </button>
-          <button
-            className={
-              this.filter == "Home"
-                ? "filter-button active-filter"
-                : "filter-button"
-            }
-            onClick={() => (this.filter = "Home")}
-          >
-            Home
-          </button>
-          <button
-            className={
-              this.filter == "Misc"
-                ? "filter-button active-filter"
-                : "filter-button"
-            }
-            onClick={() => (this.filter = "Misc")}
-          >
-            Misc
-          </button>
+          <FilterButton
+            filter={this.filter}
+            myFilter="All tasks"
+            setFilter={(filter) => (this.filter = filter)}
+          />
+          <FilterButton
+            filter={this.filter}
+            myFilter="School"
+            setFilter={(filter) => (this.filter = filter)}
+          />
+          <FilterButton
+            filter={this.filter}
+            myFilter="Social"
+            setFilter={(filter) => (this.filter = filter)}
+          />
+          <FilterButton
+            filter={this.filter}
+            myFilter="Home"
+            setFilter={(filter) => (this.filter = filter)}
+          />
+          <FilterButton
+            filter={this.filter}
+            myFilter="Misc"
+            setFilter={(filter) => (this.filter = filter)}
+          />
         </div>
         <div className="list-wrapper">
           {(this.filter != null
