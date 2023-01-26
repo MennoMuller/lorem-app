@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
@@ -11,28 +11,26 @@ import Sidebar from "./components/Sidebar";
 
 import avatar from "./img/avatar.jpg";
 
-class App extends React.Component {
-  state = {
-    user: {},
-    tasks: [],
-    websites: [],
-    geo: {
-      name: "",
-      state: "",
-      country: ""
-    },
-    current: {
-      main: { temp: "", feels_like: "" },
-      weather: [{ icon: "04d", main: "" }],
-      wind: { speed: "" }
-    },
-    predictions: [],
-    date: new Date()
-  };
+const App = () => {
+  const [user, setUser] = useState({});
+  const [tasks, setTasks] = useState([]);
+  const [websites, setWebsites] = useState([]);
+  const [geo, setGeo] = useState({
+    name: "",
+    state: "",
+    country: ""
+  });
+  const [current, setCurrent] = useState({
+    main: { temp: "", feels_like: "" },
+    weather: [{ icon: "04d", main: "" }],
+    wind: { speed: "" }
+  });
+  const [predictions, setPredictions] = useState([]);
+  const [date, setDate] = useState(new Date());
 
-  APIKey = "a41f22726acb8cb21959b4d538ac9093";
+  const APIKey = "a41f22726acb8cb21959b4d538ac9093";
 
-  getDefaultIconUrl = (url) => {
+  const getDefaultIconUrl = (url) => {
     const firstPoint = url.indexOf(".");
     let secondPoint = url.indexOf(".", firstPoint + 1);
     if (
@@ -49,7 +47,7 @@ class App extends React.Component {
     return urlBase + "/favicon.ico";
   };
 
-  compareTasks(a, b) {
+  const compareTasks = (a, b) => {
     if (!a.deadline_date) {
       if (!b.deadline_date) {
         return 0;
@@ -83,194 +81,173 @@ class App extends React.Component {
       return 1;
     }
     return 0;
-  }
+  };
 
-  toggleComplete = (index) => {
+  const toggleComplete = (index) => {
     console.log(index + " completeness toggle");
   };
 
-  tick = () => {
-    this.setState({ date: new Date() });
+  const tick = () => {
+    setDate(new Date());
   };
 
-  handleUser = () => {
+  const handleUser = () => {
     fetch("data/user.json")
       .then((response) => response.json())
-      .then((data) =>
-        this.setState({
-          user: data
-        })
-      );
+      .then((data) => setUser(data));
   };
 
-  handleTasks = () => {
+  const handleTasks = () => {
     fetch("data/tasks.json")
       .then((response) => response.json())
-      .then((data) =>
-        this.setState({
-          tasks: data
-        })
-      );
+      .then((data) => setTasks(data));
   };
 
-  handleWebsites = () => {
+  const handleWebsites = () => {
     fetch("data/websites.json")
       .then((response) => response.json())
-      .then((data) =>
-        this.setState({
-          websites: data
-        })
-      );
+      .then((data) => setWebsites(data));
   };
 
-  handleLocationUpdate = (city) => {
+  const handleLocationUpdate = (city) => {
     fetch(
       "http://api.openweathermap.org/geo/1.0/direct?q=" +
         city +
         "&limit=1&appid=" +
-        this.APIKey
+        APIKey
     )
       .then((response) => response.json())
       .then((data) => {
-        this.setState(
-          {
-            geo: data[0]
-          },
-          () => {
-            this.handleWeatherUpdate();
-            this.handleForecastUpdate();
-          }
-        );
+        setGeo(data[0]);
+        handleWeatherUpdate();
+        handleForecastUpdate();
       })
+
       .catch((error) => {
         console.log(error);
       });
   };
 
-  handleWeatherUpdate = () => {
+  const handleWeatherUpdate = () => {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=" +
-        this.state.geo.lat +
+        geo.lat +
         "&lon=" +
-        this.state.geo.lon +
+        geo.lon +
         "&units=metric&appid=" +
-        this.APIKey
+        APIKey
     )
       .then((response) => response.json())
       .then((data) => {
-        this.setState({
-          current: data
-        });
+        setCurrent(data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  handleForecastUpdate = () => {
+  const handleForecastUpdate = () => {
     fetch(
       "https://api.openweathermap.org/data/2.5/forecast?lat=" +
-        this.state.geo.lat +
+        geo.lat +
         "&lon=" +
-        this.state.geo.lon +
+        geo.lon +
         "&units=metric&appid=" +
-        this.APIKey
+        APIKey
     )
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ predictions: data.list });
+        setPredictions(data.list);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  getCurrentCity = (lat, lon) => {
+  const getCurrentCity = (lat, lon) => {
     fetch(
       `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=` +
-        this.APIKey
+        APIKey
     )
       .then((response) => response.json())
       .then((data) => {
-        this.handleLocationUpdate(data[0].name);
+        handleLocationUpdate(data[0].name);
       });
   };
 
-  componentDidMount() {
-    this.handleUser();
-    this.handleWebsites();
-    this.handleTasks();
+  useEffect(() => {
+    handleUser();
+    handleWebsites();
+    handleTasks();
 
     navigator.geolocation.getCurrentPosition((position) => {
-      this.getCurrentCity(
+      getCurrentCity(
         position.coords.latitude,
         position.coords.longitude
       );
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="app-grid">
-        <Header
-          date={this.state.date}
-          tick={this.tick}
+  return (
+    <div className="app-grid">
+      <Header
+        date={date}
+        tick={tick}
+      />
+      <Sidebar
+        avatar={avatar}
+        username={user.username}
+      />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Dashboard
+              weather={current}
+              websites={websites}
+              tasks={tasks}
+              date={date}
+              compareTasks={compareTasks}
+              iconGetter={getDefaultIconUrl}
+            />
+          }
         />
-        <Sidebar
-          avatar={avatar}
-          username={this.state.user.username}
+        <Route
+          path="/tasks"
+          element={
+            <Tasks
+              tasks={tasks}
+              toggleComplete={toggleComplete}
+              date={date}
+              compareTasks={compareTasks}
+            />
+          }
         />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Dashboard
-                weather={this.state.current}
-                websites={this.state.websites}
-                tasks={this.state.tasks}
-                date={this.state.date}
-                compareTasks={this.compareTasks}
-                iconGetter={this.getDefaultIconUrl}
-              />
-            }
-          />
-          <Route
-            path="/tasks"
-            element={
-              <Tasks
-                tasks={this.state.tasks}
-                toggleComplete={this.toggleComplete}
-                date={this.state.date}
-                compareTasks={this.compareTasks}
-              />
-            }
-          />
-          <Route
-            path="/websites"
-            element={
-              <Websites
-                websites={this.state.websites}
-                iconGetter={this.getDefaultIconUrl}
-              />
-            }
-          />
-          <Route
-            path="/weather"
-            element={
-              <Weather
-                onLocationUpdate={this.handleLocationUpdate}
-                weather={{
-                  geo: this.state.geo,
-                  current: this.state.current,
-                  predictions: this.state.predictions
-                }}
-              />
-            }
-          />
-        </Routes>
-      </div>
-    );
-  }
-}
+        <Route
+          path="/websites"
+          element={
+            <Websites
+              websites={websites}
+              iconGetter={getDefaultIconUrl}
+            />
+          }
+        />
+        <Route
+          path="/weather"
+          element={
+            <Weather
+              onLocationUpdate={handleLocationUpdate}
+              weather={{
+                geo: geo,
+                current: current,
+                predictions: predictions
+              }}
+            />
+          }
+        />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;
