@@ -101,7 +101,7 @@ a.active {
   overflow: auto;
 }
 
-.main-wrapper h1 {
+.main-wrapper > h1 {
   margin-left: 20px;
   margin-bottom: 0;
   margin-top: 20px;

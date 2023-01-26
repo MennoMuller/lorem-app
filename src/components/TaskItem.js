@@ -21,7 +21,7 @@ const TaskItem = (props) => {
   return (
     <div
       className={
-        timeLeft < 0
+        !props.complete && timeLeft < 0
           ? "list-item task-item overdue"
           : "list-item task-item"
       }

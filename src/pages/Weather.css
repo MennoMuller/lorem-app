@@ -123,6 +123,9 @@
   background-color: lightgrey;
   border-radius: 10px;
   padding: 10px;
+  font-size: smaller;
+
+  margin-bottom: 5px;
 }
 
 .prediction-icon {
@@ -144,9 +147,11 @@
   font-weight: bold;
 }
 
-.prediction-desc {
+.prediction-desc,
+.prediction-label {
   width: 50px;
   text-align: left;
+  margin-left: 5px;
 }
 
 .prediction-temp {

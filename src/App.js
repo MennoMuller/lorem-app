@@ -21,8 +21,21 @@ class App extends React.Component {
     user: {},
     tasks: [],
     websites: [],
+    geo: {
+      name: "",
+      state: "",
+      country: ""
+    },
+    current: {
+      main: { temp: "", feels_like: "" },
+      weather: [{ icon: "", main: "" }],
+      wind: { speed: "" }
+    },
+    predictions: [],
     date: new Date()
   };
+
+  APIKey = "a41f22726acb8cb21959b4d538ac9093";
 
   getDefaultIconUrl = (url) => {
     const firstPoint = url.indexOf(".");
@@ -106,6 +119,71 @@ class App extends React.Component {
     });
   };
 
+  handleLocationUpdate = (city) => {
+    fetch(
+      "http://api.openweathermap.org/geo/1.0/direct?q=" +
+        city +
+        "&limit=1&appid=" +
+        this.APIKey
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0]);
+        this.setState(
+          {
+            geo: data[0]
+          },
+          () => {
+            this.handleWeatherUpdate();
+            this.handleForecastUpdate();
+          }
+        );
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  handleWeatherUpdate = () => {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        this.state.geo.lat +
+        "&lon=" +
+        this.state.geo.lon +
+        "&units=metric&appid=" +
+        this.APIKey
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          current: data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  handleForecastUpdate = () => {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/forecast?lat=" +
+        this.state.geo.lat +
+        "&lon=" +
+        this.state.geo.lon +
+        "&units=metric&appid=" +
+        this.APIKey
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.list);
+        this.setState({ predictions: data.list });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   userJson = `{
   "id": 1,
   "username": "Menno Muller",
@@ -163,7 +241,7 @@ class App extends React.Component {
     "category": "Home",
     "deadline_date": "2023-01-19",
     "deadline_time": "18:30",
-    "complete": false,
+    "complete": true,
     "user_id": 1
   },{
     "id": 7,
@@ -331,7 +409,16 @@ class App extends React.Component {
           />
           <Route
             path="/weather"
-            element={<Weather />}
+            element={
+              <Weather
+                onLocationUpdate={this.handleLocationUpdate}
+                weather={{
+                  geo: this.state.geo,
+                  current: this.state.current,
+                  predictions: this.state.predictions
+                }}
+              />
+            }
           />
         </Routes>
       </div>

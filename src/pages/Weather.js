@@ -1,4 +1,6 @@
 import React from "react";
+import WeatherForecast from "../blocks/WeatherForecast";
+import WeatherLocation from "../blocks/WeatherLocation";
 import WeatherNow from "../blocks/WeatherNow";
 import "./Weather.css";
 
@@ -7,18 +9,29 @@ const Weather = (props) => {
     <div className="main-wrapper">
       <h1>Weather</h1>
       <div className="main-grid">
-        <div className="grid-item item-a">
-          Weather forecast
-        </div>
-        <WeatherNow
-          temperature={99}
-          feelsLike={-99}
-          icon="50d"
-          description="Microwave"
-          wind={98}
-          rain={10.5}
+        <WeatherForecast
+          predictions={props.weather.predictions}
         />
-        <div className="grid-item item-c">Location</div>
+        <WeatherNow
+          temperature={props.weather.current.main.temp}
+          feelsLike={props.weather.current.main.feels_like}
+          icon={props.weather.current.weather[0].icon}
+          description={
+            props.weather.current.weather[0].main
+          }
+          wind={props.weather.current.wind.speed}
+          rain={
+            props.weather.current.rain
+              ? props.weather.current.rain["1h"]
+              : 0
+          }
+        />
+        <WeatherLocation
+          city={props.weather.geo.name}
+          state={props.weather.geo.state}
+          country={props.weather.geo.country}
+          onLocationUpdate={props.onLocationUpdate}
+        />
       </div>
     </div>
   );

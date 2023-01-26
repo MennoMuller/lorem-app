@@ -4,7 +4,7 @@ class Header extends React.Component {
   componentDidMount() {
     this.timerID = setInterval(
       () => this.props.tick(),
-      1000
+      500
     );
   }
 
